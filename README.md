@@ -1,8 +1,6 @@
 # Entry-Task
 ## To make a static copy of a dynamic website using open source tools
 
----
-
 ## Objectives
 
 1. To create a static copy of [this website](https://ukiericoncretecongress.com/Home/).
@@ -49,6 +47,7 @@ wget -k -K -E -r -l 10 -p -N -F -H https://www.ukiericoncretecongress.com/Home
 1. Links of the home page don't connect to other pages, even if they are downloaded properly
 1. There are some issuse with the website as well, for some reason I was unable to do the above task while connected to college Wifi.
 
+---
 
 ### Trial 2
 
