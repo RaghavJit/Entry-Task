@@ -33,6 +33,9 @@ After reserching the internet for some time, the i came to the conclusion that w
 ### Installing wget
 wget is a free and open source program. It can be downloaded [here](https://eternallybored.org/misc/wget/), it has both .zip and .exe binaries. Downloaded .exe file from here and extracted it. Then I copied the wget.exe to system32 folder, (which was already added to path in my device).
 
+
+### Trial 1
+
 Then i executed the following batch script:
 ```
 cd desktop
@@ -40,8 +43,29 @@ mkdir task
 cd task
 wget -k -K -E -r -l 10 -p -N -F -H https://www.ukiericoncretecongress.com/Home
 ```
+### Problems faced
+
+1. wget is a little confusing, doing something like the above took alot of trial and error.
+1. Links of the home page don't connect to other pages, even if they are downloaded properly
+1. There are some issuse with the website as well, for some reason I was unable to do the above task while connected to college Wifi.
+
+
+### Trial 2
+
+Batch script
+```
+cd desktop
+mkdir task
+cd task
+wget -k -K -E --adjust-extention -r -l 2 -t 2 -p -N -F -x https://www.ukiericoncretecongress.com/Home
+```
+### Problems resolved from previous trial
+
+1. -k was responsible for making the links functional, but it works only when the complete website have been downloaded. I used to manually termiante the operation, when it exceeded more than 10 failures. This stopped -k form working. To resolve this issure I reduced to number of tries to 2 as well as recursions to 2. The website was downloaded with all the relevent content within a few minutes.
+
+
 This code creates a folder named 'task' on desktop and startes the wget program with different attributes explained below:
-*  -k,  make links in downloaded HTML or CSS point to local files (after the contents are downloaded it makes them suitable for viewing locally)
+*  -k,  converts links after the complete website is downloaded (after the contents are downloaded it makes them suitable for viewing locally)
 *  -K,  before converting file X, back up as X.orig (this backs up a file as X.orig before converting it)
 *  -E   save HTML/CSS documents with proper extensions (it converts file extentions to .html if they are not in .html, **helps to make the downloaded website static**)
 *  -r   specify recursive download (it will retrive a page first, and then follow all the links on the page and repeat the same process recursivly on those pages)
@@ -49,7 +73,9 @@ This code creates a folder named 'task' on desktop and startes the wget program 
 *  -p   get all images, etc. needed to display HTML page (helps download all the images and media on the pages, .jpeg, .png, .gif)
 *  -N   don't re-retrieve files unless newer than local (don't download file if server version older than local version)
 *  -F   treat input file as HTML (treates downloaded pages as HTML pages)
-*  -H  don't create host directories (is a directory option that tells wget to structure directories)
+*  -H   create host directories (is a directory option that tells wget to structure directories)
+*  -t   set number of retries to number specified (retries to download if it fails)
+*  -x   force creation of dir (organises content of download)
 
 Above mentioned data can be accessed by following commands
 ```
@@ -61,19 +87,5 @@ wget --help >> help.txt
 ```
 On execution of this batch script, a folder will be created that will contain offline version of our dynamic website in static form.
 
-## Problems faced
-
-1. wget is a little confusing, doing something like the above took alot of trial and error.
-1. Some wget commands are hard to understand but website can't be created without them.
-1. There are some issuse with the website as well, for some reason I was unable to do the above task while connected to college Wifi.
-
-## Unresolved Issues
-
-1. Sometimes the wget fails to connect to the website (dosen't happen with other websites, possible reason might be the old version of website)
-1. Some content is not downloaded (possible reason -N command)
-
-
-
-
-
-
+### Unresolved issues
+The wget fails to connect, when device is connected to the college WiFi.
